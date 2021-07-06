@@ -1,5 +1,6 @@
-# pyqt_led
-Simple LED widget for PyQt5.
+# qtpy_led
+Simple LED widget for QtPy.  
+Forked from [pyqt_led](https://github.com/Neur1n/pyqt_led) by Neur1n and modified to work with QtPy.
 
 ![on](./screenshots/on.png)
 ![off](./screenshots/off.png)
@@ -10,10 +11,6 @@ Simple LED widget for PyQt5.
 - [License](#license)
 
 ## Installation
-### pip
-```
-$ pip install pyqt-led
-```
 
 ### setup.py
 ```
@@ -22,12 +19,13 @@ $ python setup.py install
 
 ## Usage
 The following example is also provided in the package, and will result in the screenshots shown above.
+
 ```python
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtWidgets import QGridLayout
-from PyQt5.QtWidgets import QWidget
-from pyqt_led import Led
+from qtpy.QtCore import Qt
+from qtpy.QtWidgets import QApplication
+from qtpy.QtWidgets import QGridLayout
+from qtpy.QtWidgets import QWidget
+from qtpy_led import Led
 import numpy as np
 import sys
 
@@ -61,6 +59,7 @@ class Demo(QWidget):
                      .format(self._shape[r], self._color[c], r, c))
                 c += 1
             r += 1
+
 
 app = QApplication(sys.argv)
 demo = Demo()

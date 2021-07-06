@@ -5,15 +5,15 @@ from setuptools import setup
 with open("README.md", "r") as f:
     long_description = f.read()
 
-setup(name='pyqt_led',
-      version='0.0.6',
-      description='Simple LED widget for PyQt5',
+setup(name='qtpy_led',
+      version='0.0.1',
+      description='Simple LED widget for QyPt',
       long_description=long_description,
       long_description_content_type='text/markdown',
-      url='http://github.com/Neur1n/pyqt_led',
-      author='Jihang Li',
-      author_email='Jihang.Li@outlook.com',
+      url='https://github.com/crash8229/qtpy_led',
+      author='crash8229',
+      author_email='mu304007@gmail.com',
       license='MIT',
-      packages=['pyqt_led'],
-      install_requires=['numpy', 'pyautogui'],
+      packages=['qtpy_led'],
+      install_requires=['numpy', 'pyautogui', 'QtPy'],
       zip_safe=False)
