@@ -4,36 +4,37 @@
 import numpy as np
 import pyautogui
 
-# PyQt5 imports
-from PyQt5.QtCore import QSize
-from PyQt5.QtWidgets import QPushButton
+# QtPy imports
+from qtpy.QtCore import QSize
+from qtpy.QtWidgets import QPushButton
 
 # User imports
 
 
 class Led(QPushButton):
     black = np.array([0x00, 0x00, 0x00], dtype=np.uint8)
-    white = np.array([0xff, 0xff, 0xff], dtype=np.uint8)
-    blue = np.array([0x73, 0xce, 0xf4], dtype=np.uint8)
-    green = np.array([0xad, 0xff, 0x2f], dtype=np.uint8)
-    orange = np.array([0xff, 0xa5, 0x00], dtype=np.uint8)
-    purple = np.array([0xaf, 0x00, 0xff], dtype=np.uint8)
-    red = np.array([0xf4, 0x37, 0x53], dtype=np.uint8)
-    yellow = np.array([0xff, 0xff, 0x00], dtype=np.uint8)
+    white = np.array([0xFF, 0xFF, 0xFF], dtype=np.uint8)
+    blue = np.array([0x73, 0xCE, 0xF4], dtype=np.uint8)
+    green = np.array([0xAD, 0xFF, 0x2F], dtype=np.uint8)
+    orange = np.array([0xFF, 0xA5, 0x00], dtype=np.uint8)
+    purple = np.array([0xAF, 0x00, 0xFF], dtype=np.uint8)
+    red = np.array([0xF4, 0x37, 0x53], dtype=np.uint8)
+    yellow = np.array([0xFF, 0xFF, 0x00], dtype=np.uint8)
 
     capsule = 1
     circle = 2
     rectangle = 3
 
-    def __init__(self, parent, on_color=green, off_color=black,
-                 shape=rectangle, build='release'):
+    def __init__(
+        self, parent, on_color=green, off_color=black, shape=rectangle, build="release"
+    ):
         super().__init__()
-        if build == 'release':
+        if build == "release":
             self.setDisabled(True)
         else:  # For example 'debug'
             self.setEnabled(True)
 
-        self._qss = 'QPushButton {{ \
+        self._qss = "QPushButton {{ \
                                    border: 3px solid lightgray; \
                                    border-radius: {}px; \
                                    background-color: \
@@ -44,9 +45,9 @@ class Led(QPushButton):
                                            stop: 0.8 #{}, \
                                            stop: 1 #{} \
                                        ); \
-                                 }}'
-        self._on_qss = ''
-        self._off_qss = ''
+                                 }}"
+        self._on_qss = ""
+        self._off_qss = ""
 
         self._status = False
         self._end_radius = 0
@@ -83,8 +84,8 @@ class Led(QPushButton):
         elif self._shape == Led.rectangle:
             base_w = 40
             base_h = 30
-        width = int(base_w * res_h/1080)
-        height = int(base_h * res_h/1080)
+        width = int(base_w * res_h / 1080)
+        height = int(base_h * res_h / 1080)
         return QSize(width, height)
 
     def resizeEvent(self, event):
@@ -168,8 +169,8 @@ class Led(QPushButton):
 
     def _get_gradient(self, color):
         grad = ((self.white - color) / 2).astype(np.uint8) + color
-        grad = '{:02X}{:02X}{:02X}'.format(grad[0], grad[1], grad[2])
-        color = '{:02X}{:02X}{:02X}'.format(color[0], color[1], color[2])
+        grad = "{:02X}{:02X}{:02X}".format(grad[0], grad[1], grad[2])
+        color = "{:02X}{:02X}{:02X}".format(color[0], color[1], color[2])
         return color, grad
 
     def _update_end_radius(self):
@@ -213,19 +214,20 @@ class Led(QPushButton):
         return True if self._status is False else False
 
 
-if __name__ == '__main__':
-    from PyQt5.QtCore import Qt
-    from PyQt5.QtWidgets import QApplication
-    from PyQt5.QtWidgets import QGridLayout
-    from PyQt5.QtWidgets import QWidget
+if __name__ == "__main__":
+    from qtpy.QtCore import Qt
+    from qtpy.QtWidgets import QApplication
+    from qtpy.QtWidgets import QGridLayout
+    from qtpy.QtWidgets import QWidget
     import sys
 
     class Demo(QWidget):
         def __init__(self, parent=None):
             QWidget.__init__(self, parent)
-            self._shape = np.array(['capsule', 'circle', 'rectangle'])
-            self._color = np.array(['blue', 'green', 'orange', 'purple', 'red',
-                                    'yellow'])
+            self._shape = np.array(["capsule", "circle", "rectangle"])
+            self._color = np.array(
+                ["blue", "green", "orange", "purple", "red", "yellow"]
+            )
             self._layout = QGridLayout(self)
             self._create_leds()
             self._arrange_leds()
@@ -237,16 +239,23 @@ if __name__ == '__main__':
         def _create_leds(self):
             for s in self._shape:
                 for c in self._color:
-                    exec('self._{}_{} = Led(self, on_color=Led.{}, \
-                          shape=Led.{}, build="debug")'.format(s, c, c, s))
-                    exec('self._{}_{}.setFocusPolicy(Qt.NoFocus)'.format(s, c))
+                    exec(
+                        'self._{}_{} = Led(self, on_color=Led.{}, \
+                          shape=Led.{}, build="debug")'.format(
+                            s, c, c, s
+                        )
+                    )
+                    exec("self._{}_{}.setFocusPolicy(Qt.NoFocus)".format(s, c))
 
         def _arrange_leds(self):
             for r in range(3):
                 for c in range(5):
-                    exec('self._layout.addWidget(self._{}_{}, {}, {}, 1, 1, \
-                          Qt.AlignCenter)'
-                         .format(self._shape[r], self._color[c], r, c))
+                    exec(
+                        "self._layout.addWidget(self._{}_{}, {}, {}, 1, 1, \
+                          Qt.AlignCenter)".format(
+                            self._shape[r], self._color[c], r, c
+                        )
+                    )
                     c += 1
                 r += 1
 

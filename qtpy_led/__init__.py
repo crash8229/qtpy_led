@@ -3,4 +3,4 @@
 # Python imports
 
 # User imports
-from .pyqt_led import Led
+from .qtpy_led import Led
