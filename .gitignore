@@ -1,5 +1,7 @@
 /build/
 /dist/
-/*.egg-info/
+*.egg-info/
 *.pyc
 *.swp
+.idea/
+.mypy_cache/
