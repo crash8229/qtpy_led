@@ -11,10 +11,14 @@ Forked from [pyqt_led](https://github.com/Neur1n/pyqt_led) by Neur1n and modifie
 - [License](#license)
 
 ## Installation
-
-### setup.py
+### pip
 ```
-$ python setup.py install
+$ pip install qtpy-led
+```
+
+### poetry
+```
+$ poetry install
 ```
 
 ## Usage
@@ -78,4 +82,4 @@ sys.exit(app.exec_())
 
 ## License
 
-[MIT License](LICENSE). Copyright (c) 2018 Jihang Li.
+[MIT License](LICENSE). Copyright (c) 2023 Mike Umana.
