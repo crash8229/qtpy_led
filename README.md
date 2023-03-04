@@ -82,4 +82,4 @@ sys.exit(app.exec_())
 
 ## License
 
-[MIT License](LICENSE). Copyright (c) 2023 Mike Umana.
+[MIT License](LICENSE). Copyright (c) 2023 crash8229.
