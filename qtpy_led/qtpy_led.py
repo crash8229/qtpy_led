@@ -8,8 +8,6 @@ import pyautogui
 from qtpy.QtCore import QSize
 from qtpy.QtWidgets import QPushButton
 
-# User imports
-
 
 class Led(QPushButton):
     black = np.array([0x00, 0x00, 0x00], dtype=np.uint8)
@@ -28,7 +26,7 @@ class Led(QPushButton):
     def __init__(
         self, parent, on_color=green, off_color=black, shape=rectangle, build="release"
     ):
-        super().__init__()
+        super().__init__(parent=parent)  # type: ignore
         if build == "release":
             self.setDisabled(True)
         else:  # For example 'debug'
@@ -75,6 +73,8 @@ class Led(QPushButton):
 
     def sizeHint(self):
         res_w, res_h = pyautogui.size()  # Available resolution geometry
+        base_w = 0
+        base_h = 0
         if self._shape == Led.capsule:
             base_w = 50
             base_h = 30
@@ -86,18 +86,18 @@ class Led(QPushButton):
             base_h = 30
         width = int(base_w * res_h / 1080)
         height = int(base_h * res_h / 1080)
-        return QSize(width, height)
+        return QSize(width, height)  # type: ignore
 
     def resizeEvent(self, event):
         self._height = self.size().height()
         QPushButton.resizeEvent(self, event)
 
-    def setFixedSize(self, width, height):
+    def setFixedSize(self, width, height):  # noqa
         self._height = height
         if self._shape == Led.circle:
-            QPushButton.setFixedSize(self, height, height)
+            QPushButton.setFixedSize(self, height, height)  # type: ignore
         else:
-            QPushButton.setFixedSize(self, width, height)
+            QPushButton.setFixedSize(self, width, height)  # type: ignore
 
     # ============================================================== Properties
     @property
@@ -249,7 +249,7 @@ if __name__ == "__main__":
 
         def _arrange_leds(self):
             for r in range(3):
-                for c in range(5):
+                for c in range(6):
                     exec(
                         "self._layout.addWidget(self._{}_{}, {}, {}, 1, 1, \
                           Qt.AlignCenter)".format(
@@ -259,7 +259,7 @@ if __name__ == "__main__":
                     c += 1
                 r += 1
 
-    app = QApplication(sys.argv)
+    app = QApplication(sys.argv)  # type: ignore
     demo = Demo()
     demo.show()
     sys.exit(app.exec_())
