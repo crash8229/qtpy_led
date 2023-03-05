@@ -5,11 +5,13 @@ import numpy as np
 import pyautogui
 
 # QtPy imports
-from qtpy.QtCore import QSize
+from qtpy.QtCore import QSize, Signal
 from qtpy.QtWidgets import QPushButton
 
 
 class Led(QPushButton):
+    status_changed: Signal = Signal(bool)  # type: ignore
+
     black = np.array([0x00, 0x00, 0x00], dtype=np.uint8)
     white = np.array([0xFF, 0xFF, 0xFF], dtype=np.uint8)
     blue = np.array([0x73, 0xCE, 0xF4], dtype=np.uint8)
@@ -181,9 +183,11 @@ class Led(QPushButton):
 
     def _toggle_on(self):
         self.setStyleSheet(self._on_qss)
+        self.status_changed.emit(True)
 
     def _toggle_off(self):
         self.setStyleSheet(self._off_qss)
+        self.status_changed.emit(False)
 
     def set_on_color(self, color):
         self._on_color = color

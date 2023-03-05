@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "qtpy-led"
-version = "0.1.1"
+version = "0.1.2"
 description = "Simple LED widget for QyPt"
 authors = ["crash8229 <mu304007@gmail.com>"]
 license = "MIT"

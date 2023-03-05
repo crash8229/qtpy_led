@@ -8,6 +8,7 @@ Forked from [pyqt_led](https://github.com/Neur1n/pyqt_led) by Neur1n and modifie
 ## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
+- [Tips](#tips)
 - [License](#license)
 
 ## Installation
@@ -79,6 +80,11 @@ demo.show()
 sys.exit(app.exec_())
 
 ```
+
+## Tips
+- If you want to be able to toggle the LED, then either use `setEnable(True)` or pass an empty string to the `build` argument in Led.
+- The `status_changed` signal will emit a boolean when the LED's state has changed.
+- Currently, the only way to shrink the LED beyond the default size is to use `setFixedSize` 
 
 ## License
 
